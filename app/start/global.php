@@ -77,7 +77,7 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
-if ($lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) {
+if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) {
 	App::setLocale($lang);
 }
 
