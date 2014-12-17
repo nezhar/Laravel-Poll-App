@@ -13,13 +13,33 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return Redirect::route('polls');
 });
 
 
-Route::get('/polls','PollsController@loadPolls');
+Route::get(Lang::get('urls.polls'),
+	array(
+		'as'=>'polls',
+		'uses' =>'PollsController@loadPolls'
+	)
+);
 
-Route::get('/poll/{id}','PollsController@showPoll');
-Route::post('/poll/{id}','PollsController@saveAnswer');
+Route::get(Lang::get('urls.poll_detail'),
+	array(
+		'as' => 'poll_detail',
+		'uses' => 'PollsController@showPoll',
+	)
+);
+Route::post(Lang::get('urls.poll_save'),
+	array(
+		'as' => 'poll_save',
+		'uses' => 'PollsController@saveAnswer',
+	)
+);
 
-Route::get('/results/{id}','PollsController@showResults');
+Route::get(Lang::get('urls.poll_results'),
+	array(
+		'as' => 'results',
+		'uses' => 'PollsController@showResults',
+	)
+);

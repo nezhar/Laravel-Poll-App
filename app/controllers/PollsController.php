@@ -23,7 +23,7 @@ class PollsController extends BaseController
 		$poll = Poll::find((int) $id);
 		$poll->answers()->where('id', (int) $answer)->increment('votes');
 
-		return Redirect::to("results/$id");
+		return Redirect::route('results', array( 'id' => $id, ));
 	}
 
 	public function showResults($id)

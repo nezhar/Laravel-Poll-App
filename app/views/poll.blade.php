@@ -1,15 +1,20 @@
-<h1>{{{$poll->question}}}</h1>
+@extends('base')
 
+@section('heading')
+	<h1>{{{$poll->question}}}</h1>
+@stop
 
-{{ Form::open() }}
+@section('content')
+	{{ Form::open(array('url' => route('poll_save', array('id' => $poll->id)))) }}
 
 	@foreach ($poll->answers as $answer)
 		<p>{{Form::radio('answer', $answer->id)}} {{{$answer->answer}}}</p>
 	@endforeach
 
-{{ Form::submit('Save') }}
-{{ Form::close() }}
+	{{ Form::submit(Lang::get('poll.save')) }}
+	{{ Form::close() }}
 
-<hr>
+	<hr>
 
-<a href="/polls">Back</a>
+	{{ link_to_route('polls', Lang::get('poll.back')) }}
+@stop

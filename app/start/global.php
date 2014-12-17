@@ -77,5 +77,13 @@ App::down(function()
 | definitions instead of putting them all in the main routes file.
 |
 */
+if ($lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2)) {
+	App::setLocale($lang);
+}
+
+App::missing(function($exception)
+{
+	return Redirect::to('/');
+});
 
 require app_path().'/filters.php';
